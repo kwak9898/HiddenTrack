@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--FA 임포트 넣기-->
+    <title>즐겨찾기 페이지</title>
+
+    <style>
+        .wrap {
+            background-color: RGBA(232, 52, 78, 0.2);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-color: white;
+            background-image: url('https://static.wixstatic.com/media/b7b2d6_2aa84a5bfbc24da1ac05d66207b6ee79~mv2.png/v1/fill/w_112,h_112,al_c,q_85,usm_0.66_1.00_0.01/Asset%20612.webp');
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            view_like()
+        });
+
+        function view_like() {
+            $.ajax({
+                type: "GET",
+                url: "/like?sample_give=샘플데이터",
+                data: {},
+                success: function (response) {
+                    alert(response['msg'])
+                }
+            })
+        }
+
+        function unlike_posting() {
+            $.ajax({
+                type: "POST",
+                url: "/like",
+                data: {sample_give: '샘플데이터'},
+                success: function (response) {
+                    alert(response['msg'])
+                    // 새로고침해서 라이크 사라진걸로 보이도록 !
+                }
+            })
+        }
+
+    </script>
+
+</head>
+<body>
+<div class=wrap>
+    <div class='banner' onclick="window.location.href = '/'"></div>
+    <div class="container">
+        <div class="search-box d-flex justify-content-center">
+            <input id="input-search" class="form-control" style="margin-right: 0.5rem"
+                   placeholder="지하철역 혹은 카페이름을 검색해주세요!!">
+            <button class="btn btn-light" onclick="find_cafe()"><i class="fa fa-search"></i></button>
+        </div>
+        <hr>
+        <p>파인드카페가 db에서 가져오는 GET으로 진행. 여기서 지역 나눠서 검색할 수 있게? 무슨말이냐면 '지하철역'으로 나누는게 제일 좋을듯</p>
+        <p>만약 검색을 하면 해당 값만 나오는거죠! 만약 강남역을 검색하면 강남역 포함 db값들을 get해오고 카페이름을 검색하면 해당되는 값들 나오는 거고</p>
+        <p>로딩이 되면 저장되어 있는 카페들이 나오는 거고 검색하면 검색내용에 대한 카페들만 나오는 방식!</p>
+        <p>뷰카페는 로딩되면 나오는 함수(메인페이지). 파인드카페는 검색버튼 누르면 함수적용. 찾는 카페 없으면 알러트해주고 메인페이지로!</p>
+        <p>그러면 이페이지에 포스트는 필요없는거야?</p>
+        <p>폰트어썸 임포트 넣어야함</p>
+        <div class="card-columns">
+            <div class="card">
+                <img class="card-img-top" src="http://www.outdoornews.co.kr/news/photo/201905/31058_85370_2048.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">카페이름</h5>
+                    <p class="card-text">주소</p>
+                    <p class="card-text">전화번호</p>
+                    <p class="card-text">DB에서 가져오는 GET 사용해서</p>
+                    <p class="card-text">TEMP_HTML하기</p>
+                    <button type="button" class="btn btn-warning">상세페이지</button>
+                    <button onclick='unlike_posting()' type="button" class="btn btn-danger">즐찾버튼(하트) FA사용?</button>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

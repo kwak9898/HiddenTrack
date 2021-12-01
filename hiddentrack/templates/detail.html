@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--FA 임포트 넣기-->
+    <title>상세페이지</title>
+
+    <style>
+    </style>
+    <script>
+        $(document).ready(function () {
+            view_detail()
+        });
+
+        function view_detail() {
+            $.ajax({
+                type: "GET",
+                url: "/detail?sample_give=샘플데이터",
+                data: {},
+                success: function (response) {
+                    alert(response['msg'])
+                }
+            })
+        }
+
+        function comment_posting() {
+            let id = $("#title").val()
+            let title = $("#content").val()
+            let artist = $("#title").val()
+            let comment = $("#content").val()
+            $.ajax({
+                type: "POST",
+                url: "/detail",
+                data: {sample_give: '샘플데이터'},
+                success: function (response) {
+                    alert(response['msg'])
+                    // 새로고침하기?해서 바로 겟해올 수 있게
+                }
+            })
+        }
+    </script>
+    </script>
+</head>
+
+<body>
+<div class='wrap'>
+    <div class="jumbotron jumbotron-fluid">
+        <h1>상세페이지</h1>
+        <hr>
+        <h4>해당카페사진(메인페이지랑 똑같은걸로하죠)</h4>
+    </div>
+    <div>
+        <p>사장님께서 업로드해주신 뮤직리스트</p>
+
+    </div>
+    <div class="container">
+        <div>
+            <h5>내가 좋아하는 카페의 Hidden Track 및 Comment 남겨주세요 !</h5>
+        </div>
+        <div class='posting-box'>
+            <div class="form-group">
+                <input type="email" class="form-control" id="exampleFormControlInput1"
+                       placeholder="인상 깊었던 노래 ex) 여전히 아름다운지">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="그 노래의 가수 ex) 김연우">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                          placeholder="자유로운 한줄평 남겨주세요-! ex) 오랜만에 띵곡이라 감동먹고 갑니다용" )></textarea>
+            </div>
+            <button onclick="comment_posting()" type="submit" class="btn btn-primary">Comment 남기기</button>
+            <div>
+                <p>post로 가져갈 부분? 그런데 이제 메인페이지랑 따로 app을 만들어야함?></p>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p>아이디,노래 제목, 가수 , 코멘트 등등등등이 temp_html로 들어올 부분 아마 GET으로 가져오겠죠? </p>
+        <table id='orders-box' class="table">
+            <thead>
+            <tr>
+                <th scope="col">아이디</th>
+                <th scope="col">노래제목</th>
+                <th scope="col">가수</th>
+                <th scope="col">comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>gudwls5925</td>
+                <td>여전히 아름다운지</td>
+                <td>김연우</td>
+                <td>오랜만에 듣는 띵곡 너무 좋아버렷쥬</td>
+            </tr>
+            <tr>
+                <td>gudwls5925</td>
+                <td>여전히 아름다운지</td>
+                <td>김연우</td>
+                <td>오랜만에 듣는 띵곡 너무 좋아버렷쥬ㅜ쥬쥬쥬쥬쥬즂이러ㅗㅎ게기러지면기러지면기러지면기러지면기러지면어떻게 되ㅏㄹ지?!?!?</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
